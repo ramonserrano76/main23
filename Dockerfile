@@ -1,10 +1,11 @@
-# Usa la imagen oficial de Node.js 18
+# Usa la imagen oficial de Node.js 14
 FROM node:14-slim
-# We don't need the standalone Chromium
+
+# No es necesario el Chromium independiente
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
-# Instala dependencias necesarias
-RUN apt-get update && apt-get install -y \
+# Instala las dependencias necesarias y actualiza los repositorios
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     curl \
     gnupg \
     wget \
@@ -17,13 +18,12 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     libxi6 \
     libxrandr2 \
-    libxscrnsaver1 \
     libxtst6 \
     libpango-1.0-0 \
     fonts-noto-cjk \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Google Chrome Stable
+# Instala Google Chrome Stable
 RUN curl --location --silent https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
     && apt-get update \
@@ -34,16 +34,16 @@ RUN curl --location --silent https://dl-ssl.google.com/linux/linux_signing_key.p
 WORKDIR /usr/src/app
 
 # Copia los archivos de tu proyecto al contenedor
-
 COPY package.json package-lock.json ./
 
 # Copia el resto de los archivos
 COPY . .
 
+# Instala las dependencias de la aplicación
 RUN npm install
 
 # Expón el puerto en el que se ejecuta tu aplicación (ajusta según tu aplicación)
-EXPOSE  8000
+EXPOSE 8000
 
 # Comando para iniciar la aplicación
 CMD ["npm", "start"]
