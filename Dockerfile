@@ -5,23 +5,7 @@ FROM node:14
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 # Instala las dependencias necesarias y actualiza los repositorios
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-    curl \
-    gnupg \
-    wget \
-    libatk-bridge2.0-0 \
-    libgtk-3-0 \
-    libx11-xcb1 \
-    libxcomposite1 \
-    libxcursor1 \
-    libxdamage1 \
-    libxext6 \
-    libxi6 \
-    libxrandr2 \
-    libxtst6 \
-    libpango-1.0-0 \
-    fonts-noto-cjk \
-    && rm -rf /var/lib/apt/lists/*
+
 
 # Instala Google Chrome Stable
 RUN curl --location --silent https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -34,7 +18,7 @@ RUN curl --location --silent https://dl-ssl.google.com/linux/linux_signing_key.p
 WORKDIR /usr/src/app
 
 # Copia los archivos de tu proyecto al contenedor
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 # Copia el resto de los archivos
 COPY . .
