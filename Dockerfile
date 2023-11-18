@@ -5,23 +5,8 @@ FROM node:17
 # ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 # Instala las dependencias necesarias y actualiza los repositorios
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-    curl \
-    gnupg \
-    wget \
-    libatk-bridge2.0-0 \
-    libgtk-3-0 \
-    libx11-xcb1 \
-    libxcomposite1 \
-    libxcursor1 \
-    libxdamage1 \
-    libxext6 \
-    libxi6 \
-    libxrandr2 \
-    libxtst6 \
-    libpango-1.0-0 \
-    fonts-noto-cjk \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get upgrade -y && apt-get install -y 
+
 
 # Create a new user
 RUN useradd -m myuser
