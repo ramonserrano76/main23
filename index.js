@@ -14,6 +14,7 @@ const mergedConfig = Object.assign({}, puppeteerConfig, {
 const launchOptions = {
     headless: "new", // Set to true for headless mode, or false for visible mode
     ...mergedConfig, // Spread the merged configuration here
+    args: ['--no-sandbox']
 };
 
 const runAutomation = async () => {
