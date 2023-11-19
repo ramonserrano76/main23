@@ -1,5 +1,5 @@
 # Usa la imagen oficial de Node.js 14
-FROM node:19
+FROM node:18
 
 # No es necesario el Chromium independiente
 # ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
