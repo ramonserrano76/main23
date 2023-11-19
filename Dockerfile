@@ -6,8 +6,23 @@ FROM node:18
 
 # Instala las dependencias necesarias y actualiza los repositorios
 RUN apt-get update && \
-    apt-get install -y chromium fontconfig
-
+    apt-get install -y chromium fontconfig \
+    curl \
+    gnupg \
+    wget \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libx11-xcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxext6 \
+    libxi6 \
+    libxrandr2 \
+    libxtst6 \
+    libpango-1.0-0 \
+    fonts-noto-cjk \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create a new user
 RUN useradd -m myuser
@@ -32,7 +47,7 @@ COPY . .
 RUN npm install
 
 # Expón el puerto en el que se ejecuta tu aplicación (ajusta según tu aplicación)
-EXPOSE 8000
+EXPOSE 8080
 
 # Comando para iniciar la aplicación
 CMD ["npm", "start"]
