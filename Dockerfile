@@ -1,11 +1,12 @@
 # Usa la imagen oficial de Node.js 14
-FROM node:17
+FROM node:19
 
 # No es necesario el Chromium independiente
 # ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 # Instala las dependencias necesarias y actualiza los repositorios
-RUN apt-get update && apt-get upgrade -y && apt-get install -y 
+RUN apt-get update && \
+    apt-get install -y chromium fontconfig
 
 
 # Create a new user
