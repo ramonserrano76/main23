@@ -14,7 +14,8 @@ const mergedConfig = Object.assign({}, puppeteerConfig, {
 const launchOptions = {
     headless: "new", // Set to true for headless mode, or false for visible mode
     ...mergedConfig, // Spread the merged configuration here
-    args: ['--no-sandbox']
+    args: ['--no-sandbox'], 
+    // executablePath: '/usr/bin/google-chrome-stable',
 };
 
 const runAutomation = async () => {
